@@ -1,3 +1,6 @@
+"""
+Extracts images from video using OpenCV
+"""
 import cv2
 import os
 import argparse
