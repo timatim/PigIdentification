@@ -12,7 +12,6 @@ def test_model(loader, model):
     Help function that tests the models's performance on a dataset
     :param: loader: data loader for the dataset to test against
     """
-    print("testing...")
     correct = 0
     total = 0
     model.eval()
@@ -26,7 +25,7 @@ def test_model(loader, model):
         correct += (predicted == labels).sum()
         break
     model.train()
-    return (100 * correct / total)
+    return 100 * correct / total
 
 
 if __name__ == "__main__":
@@ -74,7 +73,7 @@ if __name__ == "__main__":
             if args.cuda:
                 data, labels = data.cuda(), labels.cuda()
             data, labels = Variable(data), Variable(labels)
-            print(i)
+
             optimizer.zero_grad()
             outputs = model(data)
 
