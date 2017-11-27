@@ -23,7 +23,6 @@ def test_model(loader, model):
         predicted = (outputs.max(1)[1].data.long()).view(-1)
         total += labels.size(0)
         correct += (predicted == labels).sum()
-        break
     model.train()
     return 100 * correct / total
 
@@ -56,12 +55,12 @@ if __name__ == "__main__":
     print("Defining models, loss function, optimizer...")
     # define models, loss, optimizer
     model = model.CNN()
+    print(model)
 
     if args.cuda:
         model.cuda()
-    criterion = torch.nn.CrossEntropyLoss()
+    criterion = torch.nn.NLLLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
-    print(model)
 
     print("beginning training...")
     # training the Model
@@ -92,6 +91,7 @@ if __name__ == "__main__":
                 validation_acc_history.append(val_acc)
         print("Epoch %d, time taken = %.4f" % (epoch + 1, time() - start))
         torch.save(model.state_dict(), os.path.join(args.save, "CNN_%d.pth" % epoch))
+
     print("Train Accuracy:")
     print(train_acc_history)
     print("Validation Accuracy:")
