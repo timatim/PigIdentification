@@ -4,7 +4,8 @@ import torch
 
 
 def make_dataloader(data_dir, batch_size=64, shuffle=True):
-    transform = transforms.Compose([transforms.ToTensor(),
+    transform = transforms.Compose([transforms.Scale((1280, 720)),
+                                    transforms.ToTensor(),
                                     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
     dataset = ImageFolder(data_dir, transform=transform)
     loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
